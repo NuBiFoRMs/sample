@@ -4,3 +4,10 @@ spring:
     url: jdbc:mysql://localhost:3306/manage
     username: manage
     password: manage
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    sql: debug
+    com.nubiform: debug
