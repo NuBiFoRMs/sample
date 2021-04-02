@@ -8,6 +8,11 @@ logging:
   level:
     root: info
 
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
 management:
   #endpoints.web.exposure.include: caches, health, metrics
   endpoints.web.exposure.include: '*'
