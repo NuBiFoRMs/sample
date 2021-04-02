@@ -2,14 +2,12 @@ package com.nubiform.springdatajpa.repository.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
-@ToString
 @Entity
 @Table(name = "pets")
 public class Pet {
@@ -19,4 +17,8 @@ public class Pet {
     @Column(length = 30)
     private String name;
     private LocalDate birthDate;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }
