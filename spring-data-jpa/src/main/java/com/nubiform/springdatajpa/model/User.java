@@ -2,6 +2,7 @@ package com.nubiform.springdatajpa.model;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,8 +16,11 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
     @Id
-    private String username;
+    @Column(length = 20)
+    private String name;
+    @Column(length = 20)
     private String password;
+    @Column(length = 100)
     private String email;
     private boolean enabled;
 }
