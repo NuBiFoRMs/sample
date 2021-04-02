@@ -1,6 +1,8 @@
 package com.nubiform.springdatajpa.repository;
 
-import com.nubiform.springdatajpa.model.Owner;
+import com.nubiform.springdatajpa.repository.entity.Owner;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,35 +17,56 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 class OwnerRepositoryTest {
 
+    public static final int INIT_SIZE = 1;
+    public static final int INVALID_ID = 0;
+
     @Autowired
     OwnerRepository ownerRepository;
+
+    @BeforeEach
+    void setUp() {
+        Owner owner = Owner.builder()
+                .firstName("firstName")
+                .lastName("lastName")
+                .address("address")
+                .city("city")
+                .telephone("telephone")
+                .build();
+        ownerRepository.save(owner);
+    }
+
+    @AfterEach
+    void tearDown() {
+        ownerRepository.deleteAll();
+    }
 
     @Test
     public void findAllTest() {
         List<Owner> owners = ownerRepository.findAll();
 
         assertNotNull(owners);
+        assertEquals(INIT_SIZE, owners.size());
     }
 
     @Test
     public void findByIdTest() {
-        Optional<Owner> owner = ownerRepository.findById(1);
+        Integer id = ownerRepository.findAll().get(0).getId();
 
-        assertTrue(owner.isPresent());
-        assertEquals(1, owner.get().getId());
+        Optional<Owner> resultOwner = ownerRepository.findById(id);
+
+        assertTrue(resultOwner.isPresent());
+        assertEquals(id, resultOwner.get().getId());
     }
 
     @Test
     public void findByIdNullTest() {
-        Optional<Owner> owner = ownerRepository.findById(0);
+        Optional<Owner> owner = ownerRepository.findById(INVALID_ID);
 
         assertTrue(owner.isEmpty());
     }
 
     @Test
     public void saveTest() {
-        List<Owner> beforeOwners = ownerRepository.findAll();
-
         Owner owner = Owner.builder()
                 .firstName("firstName")
                 .lastName("lastName")
@@ -55,6 +78,6 @@ class OwnerRepositoryTest {
 
         List<Owner> afterOwners = ownerRepository.findAll();
 
-        assertEquals(beforeOwners.size() + 1, afterOwners.size());
+        assertEquals(INIT_SIZE + 1, afterOwners.size());
     }
 }

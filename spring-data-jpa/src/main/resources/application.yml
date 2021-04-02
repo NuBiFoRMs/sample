@@ -1,12 +1,16 @@
 spring:
   profiles:
     group:
-      default: real-db
+      default: dev-db
       test: test-db
 
 logging:
   level:
     root: info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
 
 management:
   #endpoints.web.exposure.include: caches, health, metrics
