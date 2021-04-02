@@ -1,6 +1,6 @@
 package com.nubiform.springdatajpa.repository;
 
-import com.nubiform.springdatajpa.model.Owner;
+import com.nubiform.springdatajpa.repository.entity.Owner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

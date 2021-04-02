@@ -1,4 +1,4 @@
-package com.nubiform.springdatajpa.model;
+package com.nubiform.springdatajpa.repository.entity;
 
 import lombok.*;
 

@@ -1,6 +1,6 @@
 package com.nubiform.springdatajpa.repository;
 
-import com.nubiform.springdatajpa.model.User;
+import com.nubiform.springdatajpa.repository.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
