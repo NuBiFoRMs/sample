@@ -33,7 +33,7 @@ INSERT IGNORE INTO owners VALUES (9, 'David', 'Schroeder', '2749 Blackhawk Trail
 INSERT IGNORE INTO owners VALUES (10, 'Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
 
 CREATE TABLE IF NOT EXISTS users (
-  username VARCHAR(20) NOT NULL,
+  name VARCHAR(20) NOT NULL,
   password VARCHAR(20) NOT NULL,
   email VARCHAR(100) NOT NULL,
   enabled TINYINT NOT NULL DEFAULT 1,
