@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class User {
     @Id
     @Column(length = 20)
-    private String name;
+    private String username;
     @Column(length = 20)
     private String password;
     @Column(length = 100)

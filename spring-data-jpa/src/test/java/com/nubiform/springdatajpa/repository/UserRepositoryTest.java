@@ -25,7 +25,7 @@ class UserRepositoryTest {
     @BeforeEach
     void setUp() {
         User user = User.builder()
-                .name("name")
+                .username("name")
                 .password("password")
                 .email("email")
                 .enabled(true)
@@ -48,9 +48,9 @@ class UserRepositoryTest {
 
     @Test
     public void findByNameTest() {
-        Optional<User> user = userRepository.findByName(NAME);
+        Optional<User> user = userRepository.findByUsername(NAME);
 
         assertTrue(user.isPresent());
-        assertEquals(NAME, user.get().getName());
+        assertEquals(NAME, user.get().getUsername());
     }
 }
