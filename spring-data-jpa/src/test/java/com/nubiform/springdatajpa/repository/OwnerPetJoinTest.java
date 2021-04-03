@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -51,5 +52,21 @@ class OwnerPetJoinTest {
 
         System.out.println(pet.getName());
         System.out.println(owner.getFirstName());
+    }
+
+    @Test
+    @Transactional
+    public void joinSaveTest() {
+        Owner owner = ownerRepository.findById(1).orElseThrow();
+
+        Pet pet = Pet.builder()
+                .name("MyPet")
+                .birthDate(LocalDate.now())
+                .build();
+
+        owner.getPets().add(pet);
+        pet.setOwner(owner);
+
+        petRepository.save(pet);
     }
 }
