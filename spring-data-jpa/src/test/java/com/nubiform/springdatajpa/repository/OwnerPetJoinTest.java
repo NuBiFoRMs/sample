@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -60,13 +61,23 @@ class OwnerPetJoinTest {
         Owner owner = ownerRepository.findById(1).orElseThrow();
 
         Pet pet = Pet.builder()
-                .name("MyPet")
+                .name("TestPet")
                 .birthDate(LocalDate.now())
                 .build();
 
-        owner.getPets().add(pet);
         pet.setOwner(owner);
 
         petRepository.save(pet);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(false)
+    public void joinUpdateTest() {
+        Owner newOwner = ownerRepository.findById(2).orElseThrow();
+
+        Pet pet = petRepository.findByName("Max").orElseThrow();
+
+        pet.setOwner(newOwner);
     }
 }
