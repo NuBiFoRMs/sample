@@ -38,4 +38,12 @@ public class Owner {
         this.city = city;
         this.telephone = telephone;
     }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+    }
+
+    public void removePet(Pet pet) {
+        pets.remove(pet);
+    }
 }

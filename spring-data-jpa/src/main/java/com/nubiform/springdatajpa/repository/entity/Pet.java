@@ -1,5 +1,6 @@
 package com.nubiform.springdatajpa.repository.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,23 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    @Builder
+    public Pet(Integer id, String name, LocalDate birthDate) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
+    public void setOwner(Owner owner) {
+        if (this.owner != null) {
+            this.owner.removePet(this);
+        }
+
+        if (owner != null) {
+            owner.addPet(this);
+        }
+
+        this.owner = owner;
+    }
 }
