@@ -2,6 +2,8 @@ package com.nubiform.login.controller;
 
 import com.nubiform.login.request.LoginRequest;
 import com.nubiform.login.request.SignUpRequest;
+import com.nubiform.login.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,11 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
-public class LoginController {
+public class AccountController {
+
+    private final AccountService accountService;
 
     @GetMapping("/")
     public ResponseEntity<String> hello() {
@@ -27,6 +32,9 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         log.debug("username: {} password: {}", loginRequest.getUsername(), loginRequest.getPassword());
+
+        accountService.login(loginRequest);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -41,6 +49,9 @@ public class LoginController {
 
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        accountService.signUp(signUpRequest);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
