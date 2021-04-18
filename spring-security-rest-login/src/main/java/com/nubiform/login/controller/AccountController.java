@@ -1,5 +1,7 @@
 package com.nubiform.login.controller;
 
+import com.nubiform.login.config.CurrentUser;
+import com.nubiform.login.domain.Account;
 import com.nubiform.login.request.LoginRequest;
 import com.nubiform.login.request.SignUpRequest;
 import com.nubiform.login.service.AccountService;
@@ -25,8 +27,11 @@ public class AccountController {
     private final AccountService accountService;
 
     @GetMapping("/")
-    public ResponseEntity<String> hello() {
-        return new ResponseEntity<>("Hello World", HttpStatus.OK);
+    public ResponseEntity<String> hello(@CurrentUser Account account) {
+        if (account == null)
+            return new ResponseEntity<>("Hello World", HttpStatus.OK);
+
+        return new ResponseEntity<>("Hello World " + account.getUsername(), HttpStatus.OK);
     }
 
     @PostMapping("/login")
