@@ -1,7 +1,8 @@
 package com.nubiform.login.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nubiform.login.dto.AccountDto;
+import com.nubiform.login.request.LoginRequest;
+import com.nubiform.login.request.SignUpRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +23,7 @@ class LoginControllerTest {
 
     @Test
     void login() throws Exception {
-        AccountDto accountDto = new AccountDto();
+        LoginRequest accountDto = new LoginRequest();
         accountDto.setUsername("username");
         accountDto.setPassword("password");
 
@@ -37,9 +38,9 @@ class LoginControllerTest {
 
     @Test
     void signUp() throws Exception {
-        AccountDto accountDto = new AccountDto();
+        SignUpRequest accountDto = new SignUpRequest();
         accountDto.setUsername("username");
-        accountDto.setPassword("password");
+        accountDto.setPassword("Pass@word1");
 
         ObjectMapper objectMapper = new ObjectMapper();
 
