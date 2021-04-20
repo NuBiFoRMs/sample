@@ -1,3 +1,7 @@
 logging:
   level:
     com.nubiform: debug
+
+spring:
+  profiles:
+    active:
