@@ -10,3 +10,8 @@ springdoc.swagger-ui.path: /swagger-ui.html
 logging:
   level:
     com.nubiform: debug
+
+jwt:
+  header: Authorization
+  secret: c3ByaW5nLXNlY3VyaXR5LXJlc3QtbG9naW4=
+  token-validity-in-second: 1800
