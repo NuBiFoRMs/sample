@@ -1,6 +1,7 @@
 package com.nubiform.login.service;
 
 import com.nubiform.login.domain.Account;
+import com.nubiform.login.jwt.TokenProvider;
 import com.nubiform.login.repository.AccountRepository;
 import com.nubiform.login.request.LoginRequest;
 import com.nubiform.login.request.SignUpRequest;
@@ -26,12 +27,19 @@ public class AccountService {
 
     private final AuthenticationManager authenticationManager;
 
-    public void login(LoginRequest loginRequest) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
-        Authentication authenticate = authenticationManager.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
+    private final TokenProvider tokenProvider;
 
-        log.debug("end login");
+    public String login(LoginRequest loginRequest) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.createToken(authentication);
+
+        log.debug("success login: {}", token);
+
+        return token;
     }
 
     public Account signUp(SignUpRequest signUpRequest) {
