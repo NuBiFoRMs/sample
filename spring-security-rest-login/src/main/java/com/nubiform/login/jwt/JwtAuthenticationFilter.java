@@ -10,7 +10,7 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 @Slf4j
-public class JwtAuthenticationFilter implements GenericFilterBean {
+public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.debug("JwtAuthenticationFilter: doFilter");
