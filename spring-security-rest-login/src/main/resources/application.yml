@@ -13,5 +13,5 @@ logging:
 
 jwt:
   header: Authorization
-  secret: c3ByaW5nLXNlY3VyaXR5LXJlc3QtbG9naW4tYnktbnViaWZvcm0=
+  secret: Y29tLm51Ymlmb3JtLnNwcmluZy1zZWN1cml0eS1yZXN0LWxvZ2luLThhNzlmODMzLTZjNjAtNGMzZS1hNWE1LTY0MjAxMzZlMTg2MQ==
   token-validity-in-second: 1800

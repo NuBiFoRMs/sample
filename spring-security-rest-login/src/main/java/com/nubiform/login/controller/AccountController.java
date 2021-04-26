@@ -5,6 +5,10 @@ import com.nubiform.login.domain.Account;
 import com.nubiform.login.request.LoginRequest;
 import com.nubiform.login.request.SignUpRequest;
 import com.nubiform.login.service.AccountService;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -21,11 +25,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
+@SecurityScheme(type = SecuritySchemeType.HTTP, scheme = "Bearer", bearerFormat = "JWT", name = "Authorization", in = SecuritySchemeIn.HEADER)
 @RestController
 public class AccountController {
 
     private final AccountService accountService;
 
+    @SecurityRequirement(name = "Authorization")
     @GetMapping("/")
     public ResponseEntity<String> hello(@CurrentUser Account account) {
         if (account == null)
@@ -35,12 +41,10 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         log.debug("username: {} password: {}", loginRequest.getUsername(), loginRequest.getPassword());
 
-        accountService.login(loginRequest);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(accountService.login(loginRequest), HttpStatus.OK);
     }
 
     @PostMapping("/sign-up")

@@ -1,5 +1,6 @@
 package com.nubiform.login.jwt;
 
+import com.nubiform.login.config.UserAccount;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -41,6 +42,7 @@ public class TokenProvider implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        log.debug("afterPropertiesSet");
         this.key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
 
@@ -71,7 +73,7 @@ public class TokenProvider implements InitializingBean {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+        User principal = new UserAccount(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
@@ -79,6 +81,7 @@ public class TokenProvider implements InitializingBean {
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰 입니다.");
         } catch (UnsupportedJwtException e) {
