@@ -1,5 +1,6 @@
 package com.nubiform.login.jwt;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -8,9 +9,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
 
+@Slf4j
 public class JwtAuthenticationFilter implements GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.debug("JwtAuthenticationFilter: doFilter");
 
+        chain.doFilter(request, response);
     }
 }
