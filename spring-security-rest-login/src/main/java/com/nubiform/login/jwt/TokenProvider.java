@@ -63,17 +63,20 @@ public class TokenProvider implements InitializingBean {
     }
 
     public Authentication getAuthentication(String token) {
-        Claims claims = Jwts.parserBuilder()
+        Jws<Claims> claimsJws = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseClaimsJws(token);
+        log.debug("token: {}", claimsJws);
+
+        Claims claims = claimsJws.getBody();
 
         Collection<? extends GrantedAuthority> authorities = Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(DELIMITER))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
         User principal = new UserAccount(claims.getSubject(), "", authorities);
+        log.debug("principal: {}", principal);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
