@@ -5,6 +5,7 @@ import com.nubiform.login.domain.Account;
 import com.nubiform.login.request.LoginRequest;
 import com.nubiform.login.request.SignUpRequest;
 import com.nubiform.login.service.AccountService;
+import com.nubiform.login.validator.SignUpRequestValidator;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -15,10 +16,8 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.stream.Collectors;
@@ -29,7 +28,14 @@ import java.util.stream.Collectors;
 @RestController
 public class AccountController {
 
+    private final SignUpRequestValidator signUpRequestValidator;
+
     private final AccountService accountService;
+
+    @InitBinder("signUpRequest")
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(signUpRequestValidator);
+    }
 
     @SecurityRequirement(name = "Authorization")
     @GetMapping("/")
