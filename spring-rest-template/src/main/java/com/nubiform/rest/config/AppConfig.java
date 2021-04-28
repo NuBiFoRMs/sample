@@ -20,9 +20,11 @@ public class AppConfig {
                 .setMaxConnTotal(100)
                 .setMaxConnPerRoute(5)
                 .build();
+        factory.setHttpClient(httpClient);
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         return restTemplateBuilder
                 .requestFactory(() -> factory)
+                .errorHandler(new RestTemplateResponseErrorHandler())
                 .build();
     }
 }
