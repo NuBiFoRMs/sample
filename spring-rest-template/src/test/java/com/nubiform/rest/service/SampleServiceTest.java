@@ -17,10 +17,19 @@ class SampleServiceTest {
         account.setUsername("nubiform");
         account.setPassword("Se1rv@er387");
 
-        String token = sampleService.getToken(account);
-        String message = sampleService.getHello(token);
+        String token = sampleService.login(account);
+        String message = sampleService.sayHello(token);
 
         System.out.println(message);
+    }
+
+    @Test
+    public void signUp() {
+        Account account = new Account();
+        account.setUsername("nubiform");
+        account.setPassword("Se1rv@er387");
+
+        sampleService.signUp(account);
     }
 
 }
