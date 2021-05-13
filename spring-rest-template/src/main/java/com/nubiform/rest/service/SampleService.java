@@ -12,12 +12,23 @@ import com.nubiform.rest.vo.Account;
 @Service
 public class SampleService {
 
+    public static final String SIGN_UP_URL = "http://localhost:8080/sign-up";
     public static final String LOGIN_URL = "http://localhost:8080/login";
     public static final String HELLO_URL = "http://localhost:8080/";
 
     private final RestTemplate restTemplate;
 
-    public String getToken(Account account) {
+    public void signUp(Account account) {
+        RequestEntity<Account> requestEntity = RequestEntity
+                .method(HttpMethod.POST, SIGN_UP_URL)
+                .body(account);
+        log.debug("requestEntity: {}", requestEntity);
+
+        ResponseEntity responseEntity = restTemplate.exchange(requestEntity, void.class);
+        log.debug("responseEntity: {}", responseEntity);
+    }
+
+    public String login(Account account) {
         RequestEntity<Account> requestEntity = RequestEntity
                 .method(HttpMethod.POST, LOGIN_URL)
                 .body(account);
@@ -28,7 +39,7 @@ public class SampleService {
         return responseEntity.getBody();
     }
 
-    public String getHello(String token) {
+    public String sayHello(String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         headers.setContentType(MediaType.APPLICATION_JSON);
