@@ -1,7 +1,7 @@
 spring.mvc.request-parameter-logging-filter:
   enabled: true
-  level: DEBUG
+  level: debug
 
 logging:
   level:
-    com.parfait.study.autoconfigure.logging.filter.RequestParameterLoggingFilter: ${spring.mvc.request-parameter-logging-filter.level}
+    com.nubiform.starter.sample.RequestParameterLoggingFilter: ${spring.mvc.request-parameter-logging-filter.level}
