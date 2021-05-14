@@ -3,12 +3,14 @@
     {
       "name": "spring.mvc.request-parameter-logging-filter.enabled",
       "type": "java.lang.Boolean",
-      "description": "true 또는 false."
+      "description": "true 또는 false.",
+      "defaultValue": true
     },
     {
       "name": "spring.mvc.request-parameter-logging-filter.level",
       "type": "org.slf4j.event.Level",
-      "description": "로깅 레벨 설정."
+      "description": "로깅 레벨 설정.",
+      "defaultValue": debug
     }
   ]
 }
