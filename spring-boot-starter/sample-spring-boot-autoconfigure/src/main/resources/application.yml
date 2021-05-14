@@ -1,0 +1,7 @@
+spring.mvc.request-parameter-logging-filter:
+  enabled: true
+  level: debug
+
+logging:
+  level:
+    com.nubiform.starter.sample.RequestParameterLoggingFilter: ${spring.mvc.request-parameter-logging-filter.level}
