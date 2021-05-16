@@ -10,7 +10,7 @@ import org.springframework.boot.logging.LogLevel;
 @ConfigurationProperties(prefix = "spring.mvc.request-parameter-logging-filter")
 public class RequestParameterLoggingFilterProperties {
 
-    private boolean enabled;
+    private boolean enabled = true;
 
-    private LogLevel level;
+    private LogLevel level = LogLevel.DEBUG;
 }

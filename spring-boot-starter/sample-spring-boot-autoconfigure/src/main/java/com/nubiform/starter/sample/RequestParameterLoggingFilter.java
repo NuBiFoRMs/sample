@@ -28,6 +28,8 @@ public class RequestParameterLoggingFilter implements Filter {
     }
 
     private void log(String params) {
+        if (params == null || "".equals(params)) return;
+
         switch (level) {
             case INFO:
                 log.info(params);

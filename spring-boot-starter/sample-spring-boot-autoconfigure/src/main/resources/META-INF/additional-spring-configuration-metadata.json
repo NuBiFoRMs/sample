@@ -10,7 +10,7 @@
       "name": "spring.mvc.request-parameter-logging-filter.level",
       "type": "org.springframework.boot.logging.LogLevel",
       "description": "로깅 레벨 설정.",
-      "defaultValue": "DEBUG"
+      "defaultValue": "debug"
     }
   ]
 }
