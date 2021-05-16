@@ -2,8 +2,8 @@ package com.nubiform.starter.sample;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.event.Level;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.logging.LogLevel;
 
 @Getter
 @Setter
@@ -12,5 +12,5 @@ public class RequestParameterLoggingFilterProperties {
 
     private boolean enabled;
 
-    private Level level;
+    private LogLevel level;
 }

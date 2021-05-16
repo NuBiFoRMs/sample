@@ -23,7 +23,7 @@ public class SampleAutoConfiguration {
     @Bean
     @ConditionalOnProperty(name = "spring.mvc.request-parameter-logging-filter.enabled", havingValue = "true")
     public Filter requestParameterLoggingFilter() {
-        log.info("bean registry requestParameterLoggingFilter: {}, {}", requestParameterLoggingFilterProperties.isEnabled(), requestParameterLoggingFilterProperties.getLevel());
-        return new RequestParameterLoggingFilter();
+        log.info("Bean registry requestParameterLoggingFilter: {}, {}", requestParameterLoggingFilterProperties.isEnabled(), requestParameterLoggingFilterProperties.getLevel());
+        return new RequestParameterLoggingFilter(requestParameterLoggingFilterProperties.getLevel());
     }
 }
