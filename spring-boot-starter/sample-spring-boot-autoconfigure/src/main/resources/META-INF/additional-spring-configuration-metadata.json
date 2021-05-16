@@ -8,9 +8,9 @@
     },
     {
       "name": "spring.mvc.request-parameter-logging-filter.level",
-      "type": "org.slf4j.event.Level",
+      "type": "org.springframework.boot.logging.LogLevel",
       "description": "로깅 레벨 설정.",
-      "defaultValue": debug
+      "defaultValue": "DEBUG"
     }
   ]
 }

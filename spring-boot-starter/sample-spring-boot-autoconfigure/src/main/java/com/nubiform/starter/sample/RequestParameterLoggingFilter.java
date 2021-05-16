@@ -1,6 +1,7 @@
 package com.nubiform.starter.sample;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.logging.LogLevel;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -8,6 +9,12 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class RequestParameterLoggingFilter implements Filter {
+
+    private final LogLevel level;
+
+    public RequestParameterLoggingFilter(LogLevel level) {
+        this.level = level;
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -21,6 +28,13 @@ public class RequestParameterLoggingFilter implements Filter {
     }
 
     private void log(String params) {
-        log.debug(params);
+        switch (level) {
+            case INFO:
+                log.info(params);
+                break;
+            case DEBUG:
+                log.debug(params);
+                break;
+        }
     }
 }
