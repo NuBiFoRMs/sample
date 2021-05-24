@@ -3,6 +3,7 @@ package com.nubiform.session;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.session.Session;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,5 +19,11 @@ public class AuthController {
         log.info("username: {} password: {}" ,loginRequest.getUsername(), loginRequest.getPassword());
         session.setAttribute("username", loginRequest.getUsername());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<String> info(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        return ResponseEntity.ok(username);
     }
 }
