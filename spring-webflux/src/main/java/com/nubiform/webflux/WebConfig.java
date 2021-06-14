@@ -23,7 +23,7 @@ public class WebConfig {
     public RouterFunction<ServerResponse> routeHello() {
         return RouterFunctions.route(GET("/hello"),
                 request -> {
-                    return ServerResponse.ok().body(BodyInserters.fromValue("Hello Worldㅁㅁ"));
+                    return ServerResponse.ok().body(BodyInserters.fromValue("Hello world"));
                 });
     }
 }
