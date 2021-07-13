@@ -4,4 +4,37 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>com.nubiform.springlegacyweb.AppConfig</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>com.nubiform.springlegacyweb.WebConfig</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>app</servlet-name>
+    <url-pattern>/app/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
